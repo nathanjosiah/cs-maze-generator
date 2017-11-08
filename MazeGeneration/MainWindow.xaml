@@ -1,0 +1,31 @@
+﻿<Window x:Class="MazeGeneration.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MazeGeneration"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="158*"/>
+            <ColumnDefinition Width="313*"/>
+            <ColumnDefinition Width="121*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="461*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="generateButton" Content="Generate new" Click="button_Click" Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" />
+        <Button x:Name="printButton" Content="Save As" Click="button_Click" Grid.Row="2" Grid.Column="2" Grid.RowSpan="1" />
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,6,0,0" Grid.Row="3" Height="0" Width="0"/>
+        <TextBox x:Name="txtRows" HorizontalAlignment="Right" Height="23" Margin="58,14,0,0" TextWrapping="Wrap" Text="30" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <Label x:Name="label" Content="Rows" HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
+        <TextBox x:Name="txtColumns" HorizontalAlignment="Right" Height="23" Margin="58,40,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged" Grid.RowSpan="2"/>
+        <Label x:Name="label_Copy" Content="Columns" HorizontalAlignment="Left" Margin="15,36,0,0" Width="56"/>
+        <Slider x:Name="sldSize" Grid.Column="1" Margin="0" VerticalAlignment="Center" Width="293" ValueChanged="sldSize_ValueChanged" Minimum="10" Maximum="50" />
+        <Label x:Name="cellSizeLabel" Content="Cell size" Grid.Column="1" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
