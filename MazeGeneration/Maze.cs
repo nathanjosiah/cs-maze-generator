@@ -32,6 +32,10 @@ namespace MazeGeneration
 
         private void makeMaze(int row, int column, List<Cell> visited)
         {
+            if(cells.Count() == 0 || cells[row].Count() == 0)
+            {
+                return;
+            }
             Cell currentCell = cells[row][column];
 
             if (visited.Count() == 0)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -76,13 +77,13 @@ namespace MazeGeneration
         private void txtNumRows_Changed(object sender, TextChangedEventArgs e)
         {
             TextBox text = (TextBox)sender;
-            numRows = Convert.ToInt32(text.Text);
+            numRows = Convert.ToInt32(text.Text.Replace(" ",""));
         }
 
         private void txtNumColumns_Changed(object sender, TextChangedEventArgs e)
         {
             TextBox text = (TextBox)sender;
-            numColumns = Convert.ToInt32(text.Text);
+            numColumns = Convert.ToInt32(text.Text.Replace(" ", ""));
         }
 
         private void sldSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -94,6 +95,11 @@ namespace MazeGeneration
                 cellSizeLabel.Content = "Cell size: " + cellSize;
             }
             renderMaze(cellSize);
+        }
+
+        private void txtNumbersOnly(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.All(char.IsDigit);
         }
     }
 }
