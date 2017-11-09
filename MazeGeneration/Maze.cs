@@ -24,7 +24,10 @@ namespace MazeGeneration
 
             makeMaze(0, 0, new List<Cell>());
 
-            markOpenCell(deepestCell);
+            if(deepestCell != null)
+            {
+                markOpenCell(deepestCell);
+            }
         }
 
         private void makeMaze(int row, int column, List<Cell> visited)
