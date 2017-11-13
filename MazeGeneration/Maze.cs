@@ -14,6 +14,7 @@ namespace MazeGeneration
         private Cell deepestCell;
         private int deepestCellCount = 0;
         private int currentCount = 0;
+
         private IProgress<int> progress;
 
         public Maze(int rows, int columns,IProgress<int> progress)
@@ -49,9 +50,7 @@ namespace MazeGeneration
             List<NeighborCell> neighbors = getSurroundingCells(row, column, cells);
 
             visited.Add(cells[row][column]);
-            int p = (int)((float)(visited.Count() / (float)(numRows * numColumns)) * 100);
-            Console.WriteLine("" + p);
-            progress.Report(p);
+            progress.Report((int)((float)(visited.Count() / (float)(numRows * numColumns)) * 100));
 
             while (true)
             {
@@ -72,7 +71,10 @@ namespace MazeGeneration
                         deepestCellCount = currentCount;
                         deepestCell = currentCell;
                     }
-                    currentCount -= 1;
+                    if(currentCell.openSides.Count() > 2)
+                    {
+                        currentCount -= 1;
+                    }
                     break;
                 }
 
@@ -82,7 +84,10 @@ namespace MazeGeneration
                 neighbor_cell.openSides.Add(cell.openSide);
                 currentCell.openSides.Add(cell.direction);
 
-                currentCount += 1;
+                if (currentCell.openSides.Count() > 2)
+                {
+                    currentCount += 1;
+                }
                 this.makeMaze(cell.cell.row, cell.cell.column, visited);
             }
 

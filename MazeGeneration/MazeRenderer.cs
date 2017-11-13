@@ -43,6 +43,19 @@ namespace MazeGeneration
         {
             Line myLine;
 
+            /*
+            if(cell.openSides.Count() > 2)
+            {
+                System.Windows.Shapes.Rectangle rect = new Rectangle();
+                rect.Fill = System.Windows.Media.Brushes.HotPink;
+                Canvas.SetLeft(rect,cell.column * size);
+                Canvas.SetTop(rect,cell.row * size);
+                rect.Width = size;
+                rect.Height = size;
+                canvas.Children.Add(rect);
+            }
+            */
+
             if (!cell.openSides.Contains(Direction.NORTH))
             {
                 // Top
