@@ -41,7 +41,7 @@ namespace MazeGeneration
         public void createMaze()
         {
             maze = new Maze(numRows, numColumns, progress);
-            progressBar.Dispatcher.Invoke(() => {
+            this.Dispatcher.Invoke(() => {
                 renderMaze(cellSize);
             });
         }
