@@ -27,17 +27,23 @@ namespace MazeGeneration
         int numRows = 30;
         int numColumns = 20;
         int cellSize = 15;
+        Progress<int> progress;
 
         public MainWindow()
         {
             InitializeComponent();
-            createMaze();
+            progress = new Progress<int>(percent =>
+            {
+                progressBar.Value = percent;
+            });
         }
 
         public void createMaze()
         {
-            maze = new Maze(numRows, numColumns);
-            renderMaze(cellSize);
+            maze = new Maze(numRows, numColumns, progress);
+            progressBar.Dispatcher.Invoke(() => {
+                renderMaze(cellSize);
+            });
         }
 
         public void renderMaze(int size)
@@ -52,9 +58,13 @@ namespace MazeGeneration
 
         }
 
-        private void btnGenerateMaze_Click(object sender, RoutedEventArgs e)
+        private async void btnGenerateMaze_Click(object sender, RoutedEventArgs e)
         {
-            createMaze();
+            generateButton.IsEnabled = false;
+            progressBar.Visibility = Visibility.Visible;
+            await Task.Run(() => createMaze());
+            progressBar.Visibility = Visibility.Hidden;
+            generateButton.IsEnabled = true;
         }
 
         private void btnSaveAs_Click(object sender, RoutedEventArgs e)
@@ -77,12 +87,20 @@ namespace MazeGeneration
         private void txtNumRows_Changed(object sender, TextChangedEventArgs e)
         {
             TextBox text = (TextBox)sender;
+            if (text.Text.Length == 0)
+            {
+                return;
+            }
             numRows = Convert.ToInt32(text.Text.Replace(" ",""));
         }
 
         private void txtNumColumns_Changed(object sender, TextChangedEventArgs e)
         {
             TextBox text = (TextBox)sender;
+            if(text.Text.Length == 0)
+            {
+                return;
+            }
             numColumns = Convert.ToInt32(text.Text.Replace(" ", ""));
         }
 

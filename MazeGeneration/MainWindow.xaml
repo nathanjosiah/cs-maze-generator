@@ -26,5 +26,6 @@
         <Label x:Name="label_Copy" Content="Columns" HorizontalAlignment="Left" Margin="15,36,0,16" Width="56"/>
         <Slider x:Name="sldSize" Grid.Column="1" Margin="10,22,10,38" VerticalAlignment="Center" Width="293" ValueChanged="sldSize_ValueChanged" Minimum="10" Maximum="50" />
         <Label x:Name="cellSizeLabel" Content="Cell size" Grid.Column="1" HorizontalAlignment="Center" Margin="130,0,130,16" VerticalAlignment="Bottom"/>
+        <ProgressBar x:Name="progressBar" Grid.Column="1" HorizontalAlignment="Center" Height="10" Margin="10" Grid.Row="1" Width="293" VerticalAlignment="Center" Visibility="Hidden"/>
     </Grid>
 </Window>

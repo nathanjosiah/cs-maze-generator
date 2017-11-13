@@ -14,11 +14,13 @@ namespace MazeGeneration
         private Cell deepestCell;
         private int deepestCellCount = 0;
         private int currentCount = 0;
+        private IProgress<int> progress;
 
-        public Maze(int rows, int columns)
+        public Maze(int rows, int columns,IProgress<int> progress)
         {
             numRows = rows;
             numColumns = columns;
+            this.progress = progress;
 
             this.cells = this.generateGrid(rows, columns);
 
@@ -47,6 +49,9 @@ namespace MazeGeneration
             List<NeighborCell> neighbors = getSurroundingCells(row, column, cells);
 
             visited.Add(cells[row][column]);
+            int p = (int)((float)(visited.Count() / (float)(numRows * numColumns)) * 100);
+            Console.WriteLine("" + p);
+            progress.Report(p);
 
             while (true)
             {
