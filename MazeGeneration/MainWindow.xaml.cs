@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace MazeGeneration
         int numRows = 30;
         int numColumns = 20;
         int cellSize = 15;
+        Color selectedColor = Colors.LightSteelBlue;
         Progress<int> progress;
 
         public MainWindow()
@@ -36,24 +38,25 @@ namespace MazeGeneration
             {
                 progressBar.Value = percent;
             });
+            colorPicker.ItemsSource = typeof(Colors).GetProperties();
         }
 
         public void createMaze()
         {
             maze = new Maze(numRows, numColumns, progress);
             this.Dispatcher.Invoke(() => {
-                renderMaze(cellSize);
+                renderMaze();
             });
         }
 
-        public void renderMaze(int size)
+        public void renderMaze()
         {
             if(maze == null)
             {
                 return;
             }
 
-            MazeRenderer renderer = new MazeRenderer(size);
+            MazeRenderer renderer = new MazeRenderer(cellSize,selectedColor);
             renderer.renderToElement(maze, canvas);
 
         }
@@ -112,12 +115,25 @@ namespace MazeGeneration
             {
                 cellSizeLabel.Content = "Cell size: " + cellSize;
             }
-            renderMaze(cellSize);
+            renderMaze();
         }
 
         private void txtNumbersOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.All(char.IsDigit);
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                selectedColor = (Color)(colorPicker.SelectedItem as PropertyInfo).GetValue(null, null);
+                renderMaze();
+            }
+            catch(NullReferenceException ex)
+            {
+
+            }
         }
     }
 }

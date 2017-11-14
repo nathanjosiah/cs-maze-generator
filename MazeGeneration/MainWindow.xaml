@@ -27,5 +27,15 @@
         <Slider x:Name="sldSize" Grid.Column="1" Margin="10,22,10,38" VerticalAlignment="Center" Width="293" ValueChanged="sldSize_ValueChanged" Minimum="10" Maximum="50" />
         <Label x:Name="cellSizeLabel" Content="Cell size" Grid.Column="1" HorizontalAlignment="Center" Margin="130,0,130,16" VerticalAlignment="Bottom"/>
         <ProgressBar x:Name="progressBar" Grid.Column="1" HorizontalAlignment="Center" Height="10" Margin="10" Grid.Row="1" Width="293" VerticalAlignment="Center" Visibility="Hidden"/>
+        <ComboBox SelectedIndex="40" x:Name="colorPicker" Grid.Column="2" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Center" Width="120" SelectionChanged="comboBox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Window>

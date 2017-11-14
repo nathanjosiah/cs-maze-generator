@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace MazeGeneration
@@ -12,16 +13,18 @@ namespace MazeGeneration
     class MazeRenderer
     {
         private int size = 10;
+        private Color color;
 
-        public MazeRenderer(int size)
+        public MazeRenderer(int size, Color color)
         {
             this.size = size;
+            this.color = color;
         }
 
         private Line createLine()
         {
             Line myLine = new Line();
-            myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            myLine.Stroke = new SolidColorBrush(color);
             myLine.HorizontalAlignment = HorizontalAlignment.Left;
             myLine.VerticalAlignment = VerticalAlignment.Center;
             myLine.StrokeThickness = 2;
